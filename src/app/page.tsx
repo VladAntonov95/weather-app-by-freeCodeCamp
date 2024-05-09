@@ -73,6 +73,8 @@ interface WeatherData {
   city: CityInfo;
 }
 
+const WEATHER_API = process.env.NEXT_PUBLIC_WEATHER_KEY;
+
 export default function Home() {
   const [place, setPlace] = useAtom(placeAtom);
   const [loadingCity, _] = useAtom(loadingCityAtom);
@@ -81,7 +83,7 @@ export default function Home() {
     queryKey: ["repoData"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=8`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${WEATHER_API}&cnt=8`
       );
       return data;
     },
